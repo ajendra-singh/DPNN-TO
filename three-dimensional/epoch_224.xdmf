@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Xdmf Version="3.0">
+  <Domain>
+    <Grid Name="grid1" GridType="Uniform">
+      <Topology TopologyType="3DRectMesh" Dimensions="120 240 30"/>
+      <Geometry GeometryType="ORIGIN_DXDYDZ">
+        <DataItem Dimensions="3" NumberType="Float" Precision="8" Format="XML">0.0 0.0 0.0</DataItem>
+        <DataItem Dimensions="3" NumberType="Float" Precision="8" Format="XML">0.008368200836820083  0.008403361344537815  0.008620689655172414</DataItem>
+      </Geometry>
+      <Attribute Name="Density" AttributeType="Scalar" Center="Node">
+        <DataItem Dimensions="120 240 30" NumberType="Float" Precision="4" Format="HDF">epoch_224.h5:/Density</DataItem>
+      </Attribute>
+    </Grid>
+  </Domain>
+</Xdmf>
