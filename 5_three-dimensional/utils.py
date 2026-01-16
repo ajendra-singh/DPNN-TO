@@ -9,18 +9,16 @@ from skimage import measure
 from matplotlib.colors import LightSource
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-
 def plotTO(x, y, z, X, Y, Z, rho_model, B, epoch):   
     rho = rho_model(fourier_map(x, y, z, B))
-    ms_rho = rho.data.cpu().numpy().reshape(X.shape)
-    density = ms_rho
+    dens_rho = rho.data.cpu().numpy().reshape(X.shape)
+    density = dens_rho
     nely, nelx, nelz = X.shape
     nelm = max(nely,nelx,nelz)
     padding = np.zeros([nely+2,nelx+2,nelz+2])
-    padding[1:-1, 1:-1, 1:-1] = np.copy(ms_rho)
-    ms_rho = padding
-    verts, faces, normals, values = measure.marching_cubes(ms_rho, 0.49) #set the density cutoff
+    padding[1:-1, 1:-1, 1:-1] = np.copy(dens_rho)
+    dens_rho = padding
+    verts, faces, normals, values = measure.marching_cubes(dens_rho, 0.49) #set the density cutoff
     fig = plt.figure(figsize=(8, 10))
     ax = fig.add_subplot(1,1,1,projection='3d')
     ls = LightSource(azdeg=30, altdeg=60)
